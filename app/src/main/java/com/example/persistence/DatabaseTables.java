@@ -8,6 +8,8 @@ public class DatabaseTables {
         static final String COLUMN_NAME_NAME = "name";
         static final String COLUMN_NAME_POISONLEVEL = "poisonLevel";
 
+        static final String COLUMN_NAME_COLOR = "color";
+
     }
 
     static final String SQL_CREATE_TABLE_PLANT =
@@ -15,7 +17,8 @@ public class DatabaseTables {
             "CREATE TABLE " + Plant.TABLE_NAME + " (" +
                     Plant.COLUMN_NAME_ID + " INTEGER PRIMARY KEY," +
                     Plant.COLUMN_NAME_NAME + " TEXT," +
-                    Plant.COLUMN_NAME_POISONLEVEL + " INT)";
+                    Plant.COLUMN_NAME_POISONLEVEL + " INT," +
+                    Plant.COLUMN_NAME_COLOR + " TEXT)";
 
     static final String SQL_DELETE_TABLE_PLANT =
             // "DROP TABLE IF EXISTS mountain"
