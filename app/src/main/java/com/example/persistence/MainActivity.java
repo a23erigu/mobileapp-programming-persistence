@@ -3,12 +3,16 @@ package com.example.persistence;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText nameAdd;
     private EditText poisonLevelAdd;
     private EditText colorAdd;
+    private View readView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         poisonLevelAdd = findViewById(R.id.editView2);
         colorAdd = findViewById(R.id.editView3);
 
+        readView = findViewById(R.id.readTextView);
+
         writeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,6 +53,20 @@ public class MainActivity extends AppCompatActivity {
                 nameAdd.setText("");
                 poisonLevelAdd.setText("");
                 colorAdd.setText("");
+            }
+        });
+
+        readButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("tolor", "test");
+                Cursor cursor = database.query(DatabaseTables.Plant.TABLE_NAME, null, null, null, null, null, null);
+                Log.d("tolor", cursor.toString());
+                //Log.d("tolor", cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_NAME)));
+                while (cursor.moveToNext()) {
+
+                }
+                cursor.close();
             }
         });
 

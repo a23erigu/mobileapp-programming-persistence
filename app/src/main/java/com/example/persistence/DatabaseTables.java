@@ -7,7 +7,6 @@ public class DatabaseTables {
         static final String COLUMN_NAME_ID = "id";
         static final String COLUMN_NAME_NAME = "name";
         static final String COLUMN_NAME_POISONLEVEL = "poisonLevel";
-
         static final String COLUMN_NAME_COLOR = "color";
 
     }
