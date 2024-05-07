@@ -10,9 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText nameAdd;
     private EditText poisonLevelAdd;
     private EditText colorAdd;
-    private View readView;
+    private TextView readView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +59,31 @@ public class MainActivity extends AppCompatActivity {
         readButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("tolor", "test");
                 Cursor cursor = database.query(DatabaseTables.Plant.TABLE_NAME, null, null, null, null, null, null);
-                Log.d("tolor", cursor.toString());
-                //Log.d("tolor", cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_NAME)));
-                while (cursor.moveToNext()) {
+                ArrayList<String> plants = new ArrayList<>();
 
+                while (cursor.moveToNext()) {
+                    Log.d("tolor", "trol");
+                    Log.d("tolor", cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_ID)));
+                    Log.d("tolor", cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_NAME)));
+                    Log.d("tolor", cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_POISONLEVEL)));
+                    Log.d("tolor", cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_COLOR)));
+
+                    plants.add("ID: " + cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_ID)) +
+                                " Name: " + cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_NAME)) +
+                                " Poison level: " +  cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_POISONLEVEL)) +
+                                " Color: " + cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_COLOR)) + "\n");
+
+                    cursor.getLong(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_ID));
+                    cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_NAME));
+                    cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_POISONLEVEL));
+                    cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_COLOR));
                 }
+                String textPlants = "";
+                for (String string : plants){
+                    textPlants  = textPlants + string;
+                }
+                readView.setText(textPlants);
                 cursor.close();
             }
         });
