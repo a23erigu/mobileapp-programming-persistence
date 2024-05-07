@@ -1,42 +1,64 @@
 
 # Rapport
 
-**Skriv din rapport här!**
+**Persistence**
 
-_Du kan ta bort all text som finns sedan tidigare_.
+Denna uppgift gick ut på att skapa en SQLite databas och sedan kunna skriva och läsa från den.
 
-## Följande grundsyn gäller dugga-svar:
+Två nya java filer lades till i deta projekt, dom filerna var DatabaseTables och DatabaseHelper.
 
-- Ett kortfattat svar är att föredra. Svar som är längre än en sida text (skärmdumpar och programkod exkluderat) är onödigt långt.
-- Svaret skall ha minst en snutt programkod.
-- Svaret skall inkludera en kort övergripande förklarande text som redogör för vad respektive snutt programkod gör eller som svarar på annan teorifråga.
-- Svaret skall ha minst en skärmdump. Skärmdumpar skall illustrera exekvering av relevant programkod. Eventuell text i skärmdumpar måste vara läsbar.
-- I de fall detta efterfrågas, dela upp delar av ditt svar i för- och nackdelar. Dina för- respektive nackdelar skall vara i form av punktlistor med kortare stycken (3-4 meningar).
+I DatabaseTables bstämdes det hur databasen skule se ut och skapas.
 
-Programkod ska se ut som exemplet nedan. Koden måste vara korrekt indenterad då den blir lättare att läsa vilket gör det lättare att hitta syntaktiska fel.
+DatabaseHelper hjälper till så att det går att interigera med databasen.
 
+en text ruta, Två knappar som heter Read och Write och tre text fält lades till i activity_main.xml.
+
+På write knappen sates det så när den tryks skrivs informatione in i text fälten 
+till databasen. 
 ```
-function errorCallback(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            // Geolocation API stöds inte, gör något
-            break;
-        case error.POSITION_UNAVAILABLE:
-            // Misslyckat positionsanrop, gör något
-            break;
-        case error.UNKNOWN_ERROR:
-            // Okänt fel, gör något
-            break;
+writeButton.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        ContentValues values = new ContentValues();
+        values.put(DatabaseTables.Plant.COLUMN_NAME_NAME, nameAdd.getText().toString());
+        values.put(DatabaseTables.Plant.COLUMN_NAME_POISONLEVEL, poisonLevelAdd.getText().toString());
+        values.put(DatabaseTables.Plant.COLUMN_NAME_COLOR, colorAdd.getText().toString());
+        database.insert(DatabaseTables.Plant.TABLE_NAME, null, values);
+        nameAdd.setText("");
+        poisonLevelAdd.setText("");
+        colorAdd.setText("");
     }
-}
+});
+```
+På read knappen sates det så när den tryks hämtas informatione från databasen och säts i textviewn.
+
+```
+readButton.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Cursor cursor = database.query(DatabaseTables.Plant.TABLE_NAME, null, null, null, null, null, null);
+        ArrayList<String> plants = new ArrayList<>();
+
+        while (cursor.moveToNext()) {
+            plants.add("ID: " + cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_ID)) +
+                        " Name: " + cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_NAME)) +
+                        " Poison level: " +  cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_POISONLEVEL)) +
+                        " Color: " + cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_COLOR)) + "\n");
+        }
+        String textPlants = "";
+        for (String string : plants){
+            textPlants  = textPlants + string;
+        }
+        readView.setText(textPlants);
+        cursor.close();
+    }
+});
 ```
 
-Bilder läggs i samma mapp som markdown-filen.
+när data ska skrivas
 
-![](android.png)
+![](WriteData.png)
 
-Läs gärna:
+när data har lästs
 
-- Boulos, M.N.K., Warren, J., Gong, J. & Yue, P. (2010) Web GIS in practice VIII: HTML5 and the canvas element for interactive online mapping. International journal of health geographics 9, 14. Shin, Y. &
-- Wunsche, B.C. (2013) A smartphone-based golf simulation exercise game for supporting arthritis patients. 2013 28th International Conference of Image and Vision Computing New Zealand (IVCNZ), IEEE, pp. 459–464.
-- Wohlin, C., Runeson, P., Höst, M., Ohlsson, M.C., Regnell, B., Wesslén, A. (2012) Experimentation in Software Engineering, Berlin, Heidelberg: Springer Berlin Heidelberg.
+![](ReadData.png)
