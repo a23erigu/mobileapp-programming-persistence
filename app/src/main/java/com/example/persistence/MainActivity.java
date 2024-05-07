@@ -63,21 +63,10 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<String> plants = new ArrayList<>();
 
                 while (cursor.moveToNext()) {
-                    Log.d("tolor", "trol");
-                    Log.d("tolor", cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_ID)));
-                    Log.d("tolor", cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_NAME)));
-                    Log.d("tolor", cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_POISONLEVEL)));
-                    Log.d("tolor", cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_COLOR)));
-
                     plants.add("ID: " + cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_ID)) +
                                 " Name: " + cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_NAME)) +
                                 " Poison level: " +  cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_POISONLEVEL)) +
                                 " Color: " + cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_COLOR)) + "\n");
-
-                    cursor.getLong(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_ID));
-                    cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_NAME));
-                    cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_POISONLEVEL));
-                    cursor.getString(cursor.getColumnIndexOrThrow(DatabaseTables.Plant.COLUMN_NAME_COLOR));
                 }
                 String textPlants = "";
                 for (String string : plants){

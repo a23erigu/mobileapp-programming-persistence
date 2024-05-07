@@ -58,18 +58,20 @@
 
 
         <EditText
+            android:id="@+id/editView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editView1"
-            app:layout_constraintTop_toBottomOf="parent"
+            android:text="@string/nameEditText"
             app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/editView2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/editView2" />
+            app:layout_constraintTop_toBottomOf="parent" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/editView2"
+            android:text="@string/poisonLevelEditText"
             app:layout_constraintTop_toBottomOf="parent"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/editView1"
@@ -79,6 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/editView3"
+            android:text="@string/colorEditText"
             app:layout_constraintTop_toBottomOf="parent"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/editView2"

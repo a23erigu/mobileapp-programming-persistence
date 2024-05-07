@@ -3,4 +3,7 @@
     <string name="starterText">The saved text will be displayed here</string>
     <string name="writeButtonText">Write</string>
     <string name="readButtonText">Read</string>
+    <string name="nameEditText">Name</string>
+    <string name="poisonLevelEditText">Poison level</string>
+    <string name="colorEditText">Color</string>
 </resources>
